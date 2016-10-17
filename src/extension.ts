@@ -28,7 +28,7 @@ class Alignment {
             return;
         }
         let config: any = (<any>vscode.workspace.getConfiguration('alignment')).chars;
-        const alignChars = Object.keys(config);
+        const alignChars = Object.keys(config).sort((a, b) => b.length - a.length);
         const selections = editor.selections;
         let maxLen = Math.max(editor.document.lineAt(selections[0].active).text.length);
         selections.forEach((selection) => {
@@ -37,37 +37,48 @@ class Alignment {
             let text = editor.document.getText(range);
             let lines = text.split(/\r\n|\r|\n/);
             let maxPosition = 0;
+            let maxPositionTmp = 0;
             let alignChar = '';
+            let alignCharTmp = '';
             let maxLineIndex = 0;
-            lines.forEach((line, i) => {
-                let positions = alignChars.map(char => ({char: char, pos: line.indexOf(char)})).filter(char => char.pos > -1).sort((char1, char2) => char1.pos - char2.pos);
-                if (positions.length > 0) {
-                    let pos = line.slice(0, positions[0].pos).replace(/\s\s*$/g, '').length;
-                    if (pos > maxPosition) {
-                        maxPosition = pos;
-                        alignChar = positions[0].char;
-                        maxLineIndex = i;
+            let founded = false;
+            do {
+                // console.log(lines, maxPositionTmp + alignCharTmp.length);
+                maxPositionTmp = maxPosition;
+                alignCharTmp = alignChar;
+                founded = false;
+                lines.forEach((line, i) => {
+                    let positions = alignChars.map(char => ({char: char, pos: line.indexOf(char, maxPositionTmp + alignCharTmp.length + 1)})).filter(char => char.pos > -1).sort((char1, char2) => char1.pos - char2.pos);
+                    if (positions.length > 0) {
+                        founded = true;
+                        let pos = line.slice(0, positions[0].pos).replace(/\s\s*$/g, '').length;
+                        if (pos > maxPosition) {
+                            maxPosition = pos;
+                            alignChar = positions[0].char;
+                            maxLineIndex = i;
+                        }
                     }
-                }
-            });
-            lines = lines.map(line => {
-                let correct = 0;
-                let positions = alignChars.map(char => line.indexOf(char)).filter(char => char > -1);
-                if (positions.length > 0) {
-                    let position = Math.min(...positions);
-                    correct = maxPosition - position;
-                    let newLine = '';
-                    if (correct < 0) {
-                        newLine += line.slice(0, position + correct) + ' '.repeat(config[alignChar].spaceBefore);
+                });
+                lines = lines.map(line => {
+                    let correct = 0;
+                    let positions = alignChars.map(char => line.indexOf(char, maxPositionTmp + alignCharTmp.length + 1)).filter(char => char > -1);
+                    if (positions.length > 0) {
+                        let position = Math.min(...positions);
+                        correct = maxPosition - position;
+                        let newLine = '';
+                        if (correct < 0) {
+                            newLine += line.slice(0, position + correct) + ' '.repeat(config[alignChar].spaceBefore);
+                        } else {
+                            newLine += line.slice(0, position) + ' '.repeat(correct + config[alignChar].spaceBefore);
+                        }
+                        newLine += line.slice(position, position + alignChar.length) + ' '.repeat(config[alignChar].spaceAfter) + line.slice(position + alignChar.length).replace(/^\s\s*/g, '');
+                        return newLine;
                     } else {
-                        newLine += line.slice(0, position) + ' '.repeat(correct + config[alignChar].spaceBefore);
+                        return line;
                     }
-                    newLine += line.slice(position, position + alignChar.length) + ' '.repeat(config[alignChar].spaceAfter) + line.slice(position + alignChar.length).replace(/^\s\s*/g, '');
-                    return newLine;
-                } else {
-                    return line;
-                }
-            })
+                });
+            } while (founded);
+
             editor.edit((editBuilder) => {
                 editBuilder.replace(range, lines.join('\n'));
             });
