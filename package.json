@@ -2,13 +2,12 @@
     "name": "alignment",
     "displayName": "Alignment",
     "description": "Align code like in Sublime Text 3 Alignment Package",
-    "version": "0.1.0",
+    "version": "0.2.1",
     "publisher": "annsk",
     "engines": {
         "vscode": "^1.5.0"
     },
     "categories": [
-        "Productivity",
         "Other"
     ],
     "activationEvents": [
@@ -64,12 +63,14 @@
             }
         ],
         "menus": {
-            "editor/context": [{
-                "when": "editorHasSelection",
-                "command": "alignment.align",
-                "alt": "alignment.align",
-                "group": "1_modification"
-            }]
+            "editor/context": [
+                {
+                    "when": "editorHasSelection",
+                    "command": "alignment.align",
+                    "alt": "alignment.align",
+                    "group": "1_modification"
+                }
+            ]
         }
     },
     "scripts": {
@@ -95,25 +96,29 @@
     },
     "icon": "docs/icon.png",
     "galleryBanner": {
-		"color": "#0071bc",
-		"theme": "dark"
-	},
-	"badges": [
-		{
-			"url": "http://vsmarketplacebadge.apphb.com/version/annsk.alignment.svg",
-			"href": "https://marketplace.visualstudio.com/items?itemName=annsk.alignment",
-			"description": "Extension version"
-		},
-		{
-			"url": "http://vsmarketplacebadge.apphb.com/installs/annsk.alignment.svg",
-			"href": "https://marketplace.visualstudio.com/items?itemName=annsk.alignment",
-			"description": "Extension installs"
-		},
-		{
-			"url": "http://vsmarketplacebadge.apphb.com/rating-short/annsk.alignment.svg",
-			"href": "https://marketplace.visualstudio.com/items?itemName=annsk.alignment#review-details",
-			"description": "Extension Rating"
-		}
-	],
-    "keywords": ["align", "alignment", "format"]
+        "color": "#0071bc",
+        "theme": "dark"
+    },
+    "badges": [
+        {
+            "url": "http://vsmarketplacebadge.apphb.com/version/annsk.alignment.svg",
+            "href": "https://marketplace.visualstudio.com/items?itemName=annsk.alignment",
+            "description": "Extension version"
+        },
+        {
+            "url": "http://vsmarketplacebadge.apphb.com/installs/annsk.alignment.svg",
+            "href": "https://marketplace.visualstudio.com/items?itemName=annsk.alignment",
+            "description": "Extension installs"
+        },
+        {
+            "url": "http://vsmarketplacebadge.apphb.com/rating-short/annsk.alignment.svg",
+            "href": "https://marketplace.visualstudio.com/items?itemName=annsk.alignment#review-details",
+            "description": "Extension Rating"
+        }
+    ],
+    "keywords": [
+        "align",
+        "alignment",
+        "format"
+    ]
 }
