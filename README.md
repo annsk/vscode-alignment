@@ -29,6 +29,10 @@ Space settings:
 
 # Updates
 
+## 0.2.2
+
+* Changed category to Formatters.
+
 ## 0.2.0
 
 * Add context menu option.

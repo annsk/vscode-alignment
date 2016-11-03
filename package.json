@@ -2,12 +2,14 @@
     "name": "alignment",
     "displayName": "Alignment",
     "description": "Align code like in Sublime Text 3 Alignment Package",
-    "version": "0.2.1",
+    "version": "0.2.2",
     "publisher": "annsk",
     "engines": {
         "vscode": "^1.5.0"
     },
     "categories": [
+        "Formatters",
+        "Languages",
         "Other"
     ],
     "activationEvents": [
@@ -80,7 +82,7 @@
     },
     "devDependencies": {
         "typescript": "^2.0.3",
-        "vscode": "^1.0.0",
+        "vscode": "^1.0.3",
         "mocha": "^2.3.3",
         "@types/node": "^6.0.40",
         "@types/mocha": "^2.2.32"
