@@ -29,7 +29,7 @@ Space settings:
 
 # Updates
 
-## 0.2.2
+## 0.2.3
 
 * Changed category to Formatters.
 

@@ -2,7 +2,7 @@
     "name": "alignment",
     "displayName": "Alignment",
     "description": "Align code like in Sublime Text 3 Alignment Package",
-    "version": "0.2.2",
+    "version": "0.2.3",
     "publisher": "annsk",
     "engines": {
         "vscode": "^1.5.0"
