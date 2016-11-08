@@ -2,7 +2,7 @@
     "name": "alignment",
     "displayName": "Alignment",
     "description": "Align code like in Sublime Text 3 Alignment Package",
-    "version": "0.2.3",
+    "version": "0.3.0",
     "publisher": "annsk",
     "engines": {
         "vscode": "^1.5.0"
@@ -13,19 +13,29 @@
         "Other"
     ],
     "activationEvents": [
-        "onCommand:alignment.align"
+        "onCommand:alignment.align",
+        "onCommand:alignment.alignWhitespace",
+        "onCommand:alignment.alignFirst"
     ],
     "main": "./out/src/extension",
     "contributes": {
         "commands": [
             {
                 "command": "alignment.align",
-                "title": "Align selection"
+                "title": "Align all chars"
+            },
+            {
+                "command": "alignment.alignFirst",
+                "title": "Align to first char"
+            },
+            {
+                "command": "alignment.alignWhitespace",
+                "title": "Align whitespace"
             }
         ],
         "configuration": {
             "type": "object",
-            "title": "Align extension configuration",
+            "title": "Alignment configuration",
             "properties": {
                 "alignment.chars": {
                     "type": "object",
@@ -34,7 +44,39 @@
                             "spaceBefore": 0,
                             "spaceAfter": 1
                         },
+                        "::": {
+                            "spaceBefore": 0,
+                            "spaceAfter": 0
+                        },
                         "=": {
+                            "spaceBefore": 1,
+                            "spaceAfter": 1
+                        },
+                        "===": {
+                            "spaceBefore": 1,
+                            "spaceAfter": 1
+                        },
+                        "==": {
+                            "spaceBefore": 1,
+                            "spaceAfter": 1
+                        },
+                        "=>": {
+                            "spaceBefore": 1,
+                            "spaceAfter": 1
+                        },
+                        "+=": {
+                            "spaceBefore": 1,
+                            "spaceAfter": 1
+                        },
+                        "-=": {
+                            "spaceBefore": 1,
+                            "spaceAfter": 1
+                        },
+                        "*=": {
+                            "spaceBefore": 1,
+                            "spaceAfter": 1
+                        },
+                        "/=": {
                             "spaceBefore": 1,
                             "spaceAfter": 1
                         }
@@ -50,6 +92,14 @@
                             "spaceAfter": {
                                 "type": "number",
                                 "default": 1
+                            },
+                            "tabsBefore": {
+                                "type": "number",
+                                "default": 1
+                            },
+                            "tabsAfter": {
+                                "type": "number",
+                                "default": 1
                             }
                         },
                         "additionalProperties": false
@@ -62,6 +112,16 @@
                 "command": "alignment.align",
                 "key": "alt+=",
                 "when": "editorHasSelection"
+            },
+            {
+                "command": "alignment.alignFirst",
+                "key": "alt+shift+=",
+                "when": "editorHasSelection"
+            },
+            {
+                "command": "alignment.alignWhitespace",
+                "key": "alt+-",
+                "when": "editorHasSelection"
             }
         ],
         "menus": {
@@ -69,7 +129,16 @@
                 {
                     "when": "editorHasSelection",
                     "command": "alignment.align",
-                    "alt": "alignment.align",
+                    "group": "1_modification"
+                },
+                {
+                    "when": "editorHasSelection",
+                    "command": "alignment.alignFirst",
+                    "group": "1_modification"
+                },
+                {
+                    "when": "editorHasSelection",
+                    "command": "alignment.alignWhitespace",
                     "group": "1_modification"
                 }
             ]

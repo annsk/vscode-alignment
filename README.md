@@ -11,23 +11,90 @@ This extension align chars in selection. It helps creating clean, formatted code
 
 Select text and press `Alt+=` (on macOS `Option+=`). You can also use context menu commend.
 
+## Shortcuts
+
+### Align all chars
+* Windows/Linux: `Alt+=`
+* macOS: `Option+=`
+
+### Align to first char
+* Windows/Linux: `Alt+Shift+=`
+* macOS: `Option+Shift+=`
+
+### Align whitespace
+* Windows/Linux: `Alt+-`
+* macOS: `Option+-`
+
 ## Extension Settings
 
 This extension contributes the following settings:
 
-* `alignment.chars`: pairs chars and their space settings
+* `alignment.chars`: pairs chars (strings) and their space settings
 
 Space settings:
 
-* `spaceBefore`: spaces count before char,
-* `spaceAfter`: spaces count after char.
+* `spaceBefore`: spaces count before char(s),
+* `spaceAfter`: spaces count after char(s),
+* `tabsBefore`: tabs count before char(s),
+* `tabsAfter`: tabs count after char(s).
 
-## Shortcuts
+## Default settings
 
-* Windows/Linux: `Alt+=`
-* macOS: `Option+=`
+```
+// Chars to align
+"alignment.chars": {
+    ":": {
+        "spaceBefore": 0,
+        "spaceAfter": 1
+    },
+    "::": {
+        "spaceBefore": 0,
+        "spaceAfter": 0
+    },
+    "=": {
+        "spaceBefore": 1,
+        "spaceAfter": 1
+    },
+    "===": {
+        "spaceBefore": 1,
+        "spaceAfter": 1
+    },
+    "==": {
+        "spaceBefore": 1,
+        "spaceAfter": 1
+    },
+    "=>": {
+        "spaceBefore": 1,
+        "spaceAfter": 1
+    },
+    "+=": {
+        "spaceBefore": 1,
+        "spaceAfter": 1
+    },
+    "-=": {
+        "spaceBefore": 1,
+        "spaceAfter": 1
+    },
+    "*=": {
+        "spaceBefore": 1,
+        "spaceAfter": 1
+    },
+    "/=": {
+        "spaceBefore": 1,
+        "spaceAfter": 1
+    }
+}
+```
 
-# Updates
+# [Changelog](CHANGELOG.md)
+
+## 0.3.0
+
+* Aligning whitespace.
+* Align to fist command
+* Extend defaults aligment chars list.
+* Ommit last line of selection if empty.
+* Tabs spacing
 
 ## 0.2.3
 
